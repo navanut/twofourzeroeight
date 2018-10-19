@@ -40,6 +40,64 @@ namespace twozerofoureight
             return board;
         }
 
+        /*public bool GameOver()
+        {
+            bool gg = false;
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    if (board[i, j] == 2048)
+                    {
+                        gg = true;
+                        return gg;
+                    }
+                }
+            }
+            return gg;
+        }*/
+        public bool CheckGameOver()
+        {
+            bool gg = false;
+            int size = boardSize;
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (board[i, j] == 0)
+                    {
+                        return gg;
+                    }
+                }
+            }
+            for (int i = 0; i < size; i++)
+            {
+                for (int j = 0; j < size; j++)
+                {
+                    if (i + 1 < 4 && board[i, j] == board[i + 1, j]) { return gg; }
+                    if (i - 1 > -1 && board[i, j] == board[i - 1, j]) { return gg; }
+                    if (j + 1 < 4 && board[i, j] == board[i, j + 1]) { return gg; }
+                    if (j - 1 > -1 && board[i, j] == board[i, j - 1]) { return gg; }
+                }
+
+            }
+            gg = true;
+            return gg;
+        }
+
+        public int GetScore()
+        {
+            int sum = 0;
+            for (int i = 0; i < boardSize; i++)
+            {
+                for (int j = 0; j < boardSize; j++)
+                {
+                    sum = sum + board[i, j];
+                }
+            }
+            return sum;
+        }
+
         private void AddRandomSlot()
         {
             while (true)
